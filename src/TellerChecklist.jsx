@@ -280,7 +280,7 @@ export default function TellerChecklist() {
 
         {/* Footer */}
         <div className="px-4 py-2 bg-gradient-to-r from-emerald-50 to-sky-50 border-t border-emerald-100">
-          <p className="text-xs text-center text-emerald-500">Hover over items for further details • v1.0</p>
+          <p className="text-xs text-center text-emerald-500">Hover over items for further details • v1.1</p>
         </div>
       </div>
     </div>
