@@ -131,13 +131,24 @@ export default function TellerChecklist() {
     setTimeout(() => setSaved(false), 2000);
   };
 
+  const copyToClipboard = () => {
+    const summary = `
+Member: ${memberName || 'N/A'}
+ID: ${memberId || 'N/A'}
+Transaction: ${transaction}
+Items Completed: ${completedCount}/${totalCount}
+    `.trim();
+    navigator.clipboard.writeText(summary);
+    alert('Summary copied to clipboard!');
+  };
+
   const completedCount = Object.values(checked).filter(Boolean).length;
   const totalCount = checklist.length;
   const progress = totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-emerald-50 to-sky-50 flex justify-center p-3">
-      <div className="w-full max-w-xs bg-white rounded-2xl shadow-lg overflow-hidden border border-emerald-100">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg overflow-hidden border border-emerald-100">
 
         {/* Header */}
         <div className="bg-gradient-to-r from-emerald-600 to-emerald-500 px-4 py-3">
@@ -274,13 +285,22 @@ export default function TellerChecklist() {
               >
                 {saved ? '✓ Saved!' : 'Save'}
               </button>
+              <button
+                onClick={copyToClipboard}
+                className="px-4 py-2.5 text-sm font-medium text-emerald-600 bg-emerald-50 rounded-xl hover:bg-emerald-100 transition-colors duration-200"
+                title="Copy Summary"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m-3 9l3 3m0 0l3-3m-3 3V10" />
+                </svg>
+              </button>
             </div>
           )}
         </div>
 
         {/* Footer */}
         <div className="px-4 py-2 bg-gradient-to-r from-emerald-50 to-sky-50 border-t border-emerald-100">
-          <p className="text-xs text-center text-emerald-500">Hover over items for further details • v1.0</p>
+          <p className="text-xs text-center text-emerald-500">Hover over items for further details</p>
         </div>
       </div>
     </div>
